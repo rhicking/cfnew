@@ -938,7 +938,7 @@ export default {
 						if (user === at) {
 							return await handleSubscriptionPage(request, user);
 						} else {
-							return new Response(JSON.stringify({ error: 'UUID error Please note that the variable name is 'u', not uuid' }), { 
+							return new Response(JSON.stringify({ error: 'UUID error Please note that the variable name is u and not uuid' }), { 
 								status: 403,
 								headers: { 'Content-Type': 'application/json' }
 							});
