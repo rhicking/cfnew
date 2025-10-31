@@ -1836,7 +1836,7 @@ async function handleSubscriptionPage(request, user = null) {
                 <div id="regionStatus" style="margin: 8px 0; color: #00ff00; font-family: 'Courier New', monospace; text-shadow: 0 0 3px #00ff00;">Worker area: During testing...</div>
                 <div id="geoInfo" style="margin: 8px 0; color: #00aa00; font-family: 'Courier New', monospace; font-size: 0.9rem; text-shadow: 0 0 3px #00aa00;">Detection method: During testing...</div>
                 <div id="backupStatus" style="margin: 8px 0; color: #00ff00; font-family: 'Courier New', monospace; text-shadow: 0 0 3px #00ff00;">ProxyIP status: During testing...</div>
-                <div id="currentIP" style="margin: 8px 0; color: #00ff00; font-family: 'Courier New', monospace; text-shadow: 0 0 3px #00ff00;">当 Previously used IP: During testing...</div>
+                <div id="currentIP" style="margin: 8px 0; color: #00ff00; font-family: 'Courier New', monospace; text-shadow: 0 0 3px #00ff00;">Previously used IP: During testing...</div>
                 <div id="regionMatch" style="margin: 8px 0; color: #00ff00; font-family: 'Courier New', monospace; text-shadow: 0 0 3px #00ff00;">Region matching: During testing...</div>
                 <div id="selectionLogic" style="margin: 8px 0; color: #00aa00; font-family: 'Courier New', monospace; font-size: 0.9rem; text-shadow: 0 0 3px #00aa00;">Selection Logic: same region → Neighboring areas → Other regions</div>
             </div>
@@ -2031,7 +2031,7 @@ async function handleSubscriptionPage(request, user = null) {
                 document.getElementById("clientSubscriptionUrl").textContent = subscriptionUrl;
                 document.getElementById("clientSubscriptionUrl").style.display = "block";
                 navigator.clipboard.writeText(subscriptionUrl).then(function() {
-                    alert(decodeURIComponent(escape(atob('VjJSYXkg6K6i6ZiF6ZO+5o6l5bey5aSN5Yi2'))));
+                    alert(decodeURIComponent(escape(atob('VjJSYXkgc3Vic2NyaXB0aW9uIGxpbmsgaGFzIGJlZW4gY29waWVk'))));
                 });
             } else {
                 var encodedUrl = encodeURIComponent(subscriptionUrl);
