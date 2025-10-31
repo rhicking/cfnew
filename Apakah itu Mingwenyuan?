@@ -31,18 +31,18 @@ let kvStore = null;
 let kvConfig = {};
 
 const regionMapping = {
-    'US': ['🇺🇸 美国', 'US', 'United States'],
-    'SG': ['🇸🇬 新加坡', 'SG', 'Singapore'],
-    'JP': ['🇯🇵 日本', 'JP', 'Japan'],
-    'HK': ['🇭🇰 香港', 'HK', 'Hong Kong'],
-    'KR': ['🇰🇷 韩国', 'KR', 'South Korea'],
-    'DE': ['🇩🇪 德国', 'DE', 'Germany'],
-    'SE': ['🇸🇪 瑞典', 'SE', 'Sweden'],
-    'NL': ['🇳🇱 荷兰', 'NL', 'Netherlands'],
-    'FI': ['🇫🇮 芬兰', 'FI', 'Finland'],
-    'GB': ['🇬🇧 英国', 'GB', 'United Kingdom'],
-    'Oracle': ['甲骨文', 'Oracle'],
-    'DigitalOcean': ['数码海', 'DigitalOcean'],
+    'US': ['🇺🇸 USA', 'US', 'United States'],
+    'SG': ['🇸🇬 Singapore', 'SG', 'Singapore'],
+    'JP': ['🇯🇵 Japan', 'JP', 'Japan'],
+    'HK': ['🇭🇰 Hongkong', 'HK', 'Hong Kong'],
+    'KR': ['🇰🇷 South Korea', 'KR', 'South Korea'],
+    'DE': ['🇩🇪 Germany', 'DE', 'Germany'],
+    'SE': ['🇸🇪 Sweden', 'SE', 'Sweden'],
+    'NL': ['🇳🇱 Netherlands', 'NL', 'Netherlands'],
+    'FI': ['🇫🇮 Finland', 'FI', 'Finland'],
+    'GB': ['🇬🇧 U.K.', 'GB', 'United Kingdom'],
+    'Oracle': ['Oracle', 'Oracle'],
+    'DigitalOcean': ['Digital Ocean', 'DigitalOcean'],
     'Vultr': ['Vultr', 'Vultr'],
     'Multacom': ['Multacom', 'Multacom']
 };
@@ -484,14 +484,14 @@ export default {
 					if (isValid) {
 						return await handleConfigAPI(request);
 					} else {
-						return new Response(JSON.stringify({ error: '路径验证失败' }), { 
+						return new Response(JSON.stringify({ error: 'Path verification failed' }), { 
 							status: 403,
 							headers: { 'Content-Type': 'application/json' }
 						});
 					}
 				}
 				
-				return new Response(JSON.stringify({ error: '无效的API路径' }), { 
+				return new Response(JSON.stringify({ error: 'Invalid API path' }), { 
 					status: 404,
 					headers: { 'Content-Type': 'application/json' }
 				});
@@ -517,14 +517,14 @@ export default {
 				if (isValid) {
 						return await handlePreferredIPsAPI(request);
 				} else {
-					return new Response(JSON.stringify({ error: '路径验证失败' }), { 
+					return new Response(JSON.stringify({ error: 'Path verification failed' }), { 
 							status: 403,
 							headers: { 'Content-Type': 'application/json' }
 						});
 					}
 				}
 			
-				return new Response(JSON.stringify({ error: '无效的API路径' }), { 
+				return new Response(JSON.stringify({ error: 'Invalid API path' }), { 
 					status: 404,
 					headers: { 'Content-Type': 'application/json' }
 				});
@@ -560,7 +560,7 @@ export default {
 					if (manualRegion && manualRegion.trim()) {
 						return new Response(JSON.stringify({
 							region: manualRegion.trim().toUpperCase(),
-							detectionMethod: '手动指定地区',
+							detectionMethod: 'Manually specify region',
 							manualRegion: manualRegion.trim().toUpperCase(),
 							timestamp: new Date().toISOString()
 						}), {
@@ -569,7 +569,7 @@ export default {
 				} else if (ci && ci.trim()) {
 						return new Response(JSON.stringify({
 							region: 'CUSTOM',
-						detectionMethod: '自定义ProxyIP模式', ci: ci,
+						detectionMethod: 'Custom ProxyIP mode', ci: ci,
 							timestamp: new Date().toISOString()
 						}), {
 							headers: { 'Content-Type': 'application/json' }
@@ -578,7 +578,7 @@ export default {
 						const detectedRegion = await detectWorkerRegion(request);
 						return new Response(JSON.stringify({
 							region: detectedRegion,
-							detectionMethod: 'API检测',
+							detectionMethod: 'API detection',
 							timestamp: new Date().toISOString()
 						}), {
 							headers: { 'Content-Type': 'application/json' }
@@ -591,7 +591,7 @@ export default {
 						const testRegion = await detectWorkerRegion(request);
 						return new Response(JSON.stringify({
 							detectedRegion: testRegion,
-							message: 'API测试完成',
+							message: 'API testing complete',
 							timestamp: new Date().toISOString()
 						}), {
 							headers: { 'Content-Type': 'application/json' }
@@ -599,7 +599,7 @@ export default {
 					} catch (error) {
 						return new Response(JSON.stringify({
 							error: error.message,
-							message: 'API测试失败'
+							message: 'API test failed'
 						}), {
 							status: 500,
 							headers: { 'Content-Type': 'application/json' }
@@ -609,11 +609,11 @@ export default {
 				
 				if (url.pathname === '/') {
 					const terminalHtml = `<!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>终端</title>
+    <title>terminal</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -756,7 +756,7 @@ export default {
     <div class="matrix-bg"></div>
     <div class="matrix-rain"></div>
     <div class="matrix-code-rain" id="matrixCodeRain"></div>
-    <div class="matrix-text">终端</div>
+    <div class="matrix-text">terminal</div>
     <div class="terminal">
         <div class="terminal-header">
             <div class="terminal-buttons">
@@ -764,24 +764,24 @@ export default {
                 <div class="terminal-button"></div>
                 <div class="terminal-button"></div>
             </div>
-            <div class="terminal-title">终端</div>
+            <div class="terminal-title">terminal</div>
         </div>
         <div class="terminal-body" id="terminalBody">
             <div class="terminal-line">
                 <span class="terminal-prompt">root:~$</span>
-                <span class="terminal-output">恭喜你来到这</span>
+                <span class="terminal-output">Congratulations on arriving here!</span>
             </div>
             <div class="terminal-line">
                 <span class="terminal-prompt">root:~$</span>
-                <span class="terminal-output">${cp && cp.trim() ? '请输入你D变量的值' : '请输入你U变量的值'}</span>
+                <span class="terminal-output">${cp && cp.trim() ? 'Please enter the value of your variable D' : 'Please enter the value of your variable U'}</span>
             </div>
             <div class="terminal-line">
                 <span class="terminal-prompt">root:~$</span>
-                <span class="terminal-output">命令: connect [${cp && cp.trim() ? 'PATH' : 'UUID'}]</span>
+                <span class="terminal-output">Order: connect [${cp && cp.trim() ? 'PATH' : 'UUID'}]</span>
             </div>
             <div class="terminal-line">
                 <span class="terminal-prompt">root:~$</span>
-                <input type="text" class="terminal-input" id="uuidInput" placeholder="${cp && cp.trim() ? '输入D变量的内容并且回车...' : '输入U变量的内容并且回车...'}" autofocus>
+                <input type="text" class="terminal-input" id="uuidInput" placeholder="${cp && cp.trim() ? 'Enter the content of variable D and press Enter...' : 'Enter the content of variable U and press Enter...'}" autofocus>
                 <span class="terminal-cursor"></span>
             </div>
         </div>
@@ -864,25 +864,25 @@ export default {
                 
                 if (cp) {
                     const cleanInput = inputValue.startsWith('/') ? inputValue : '/' + inputValue;
-                    addTerminalLine('正在连接...', 'output');
+                    addTerminalLine('Connecting...', 'output');
                     setTimeout(() => {
-                        addTerminalLine('连接成功！返回结果...', 'success');
+                        addTerminalLine('Connection successful！Return results...', 'success');
                         setTimeout(() => {
                             window.location.href = cleanInput;
                         }, 1000);
                     }, 500);
                 } else {
                     if (isValidUUID(inputValue)) {
-                    addTerminalLine('正在入侵...', 'output');
+                    addTerminalLine('Invading...', 'output');
                     setTimeout(() => {
-                        addTerminalLine('连接成功！返回结果...', 'success');
+                        addTerminalLine('Connection successful！Return results...', 'success');
                         setTimeout(() => {
                                 window.location.href = '/' + inputValue;
                         }, 1000);
                     }, 500);
                 } else {
-                    addTerminalLine('错误: 无效的UUID格式', 'error');
-                    addTerminalLine('请重新输入有效的UUID', 'output');
+                    addTerminalLine('mistake: Invalid UUID format', 'error');
+                    addTerminalLine('Please re-enter a valid UUID', 'output');
                     }
                 }
                 
@@ -922,8 +922,8 @@ export default {
 					const user = url.pathname.replace(/\/$/, '').replace('/sub', '').substring(1);
 					if (isValidFormat(user)) {
 						return new Response(JSON.stringify({ 
-							error: '访问被拒绝',
-							message: '当前 Worker 已启用自定义路径模式，UUID 访问已禁用'
+							error: 'Access denied',
+							message: 'current Worker Custom path mode is enabled，UUID Access is disabled'
 						}), { 
 							status: 403,
 							headers: { 'Content-Type': 'application/json' }
@@ -938,7 +938,7 @@ export default {
 						if (user === at) {
 							return await handleSubscriptionPage(request, user);
 						} else {
-							return new Response(JSON.stringify({ error: 'UUID错误 请注意变量名称是u不是uuid' }), { 
+							return new Response(JSON.stringify({ error: 'UUID error Please note that the variable name is 'u', not uuid' }), { 
 								status: 403,
 								headers: { 'Content-Type': 'application/json' }
 							});
@@ -953,7 +953,7 @@ export default {
 							if (user === at) {
 								return await handleSubscriptionRequest(request, user, url);
 							} else {
-								return new Response(JSON.stringify({ error: 'UUID错误' }), { 
+								return new Response(JSON.stringify({ error: 'UUID error' }), { 
 									status: 403,
 									headers: { 'Content-Type': 'application/json' }
 								});
@@ -1000,11 +1000,11 @@ async function handleSubscriptionRequest(request, user, url = null) {
     }
 
     if (currentWorkerRegion === 'CUSTOM') {
-        const nativeList = [{ ip: workerDomain, isp: '原生地址' }];
+        const nativeList = [{ ip: workerDomain, isp: 'native address' }];
         await addNodesFromList(nativeList);
     } else {
         try {
-            const nativeList = [{ ip: workerDomain, isp: '原生地址' }];
+            const nativeList = [{ ip: workerDomain, isp: 'native address' }];
             await addNodesFromList(nativeList);
         } catch (error) {
             if (!currentWorkerRegion) {
@@ -1018,7 +1018,7 @@ async function handleSubscriptionRequest(request, user, url = null) {
                 const backupList = [{ ip: fallbackAddress, isp: 'ProxyIP-' + currentWorkerRegion }];
                 await addNodesFromList(backupList);
             } else {
-                const nativeList = [{ ip: workerDomain, isp: '原生地址' }];
+                const nativeList = [{ ip: workerDomain, isp: 'native address' }];
                 await addNodesFromList(nativeList);
             }
         }
@@ -1098,7 +1098,7 @@ async function handleSubscriptionRequest(request, user, url = null) {
     }
 
     if (finalLinks.length === 0) {
-        const errorRemark = "所有节点获取失败";
+        const errorRemark = "All node acquisitions failed";
         const proto = atob('dmxlc3M=');
         const errorLink = `${proto}://00000000-0000-0000-0000-000000000000@127.0.0.1:80?encryption=none&security=none&type=ws&host=error.com&path=%2F#${encodeURIComponent(errorRemark)}`;
         finalLinks.push(errorLink);
@@ -1316,7 +1316,7 @@ async function fetchAndParseWetest(url) {
         const html = await response.text();
         const results = [];
         const rowRegex = /<tr[\s\S]*?<\/tr>/g;
-        const cellRegex = /<td data-label="线路名称">(.+?)<\/td>[\s\S]*?<td data-label="优选地址">([\d.:a-fA-F]+)<\/td>/;
+        const cellRegex = /<td data-label="Line Name">(.+?)<\/td>[\s\S]*?<td data-label="Preferred address">([\d.:a-fA-F]+)<\/td>/;
 
         let match;
         while ((match = rowRegex.exec(html)) !== null) {
@@ -1592,11 +1592,11 @@ async function handleSubscriptionPage(request, user = null) {
 	if (!user) user = at;
 	
 	const pageHtml = `<!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>订阅中心</title>
+    <title>Subscription Center</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -1806,14 +1806,14 @@ async function handleSubscriptionPage(request, user = null) {
     <div class="matrix-bg"></div>
     <div class="matrix-rain"></div>
     <div class="matrix-code-rain" id="matrixCodeRain"></div>
-    <div class="matrix-text">终端 v2.0</div>
+    <div class="matrix-text">terminal v2.0</div>
     <div class="container">
         <div class="header">
-            <h1 class="title">代理订阅中心</h1>
-            <p class="subtitle">多客户端支持 • 智能优选 • 一键生成</p>
+            <h1 class="title">Club Gratis Center</h1>
+            <p class="subtitle">Multi-client support • Smart Selection • One-click generation</p>
         </div>
         <div class="card">
-            <h2 class="card-title">[ 选择客户端 ]</h2>
+            <h2 class="card-title">[ Select Client ]</h2>
             <div class="client-grid">
                 <button class="client-btn" onclick="generateClientLink(atob('Y2xhc2g='))">CLASH</button>
                 <button class="client-btn" onclick="generateClientLink(atob('c3VyZ2U='))">SURGE</button>
@@ -1825,202 +1825,202 @@ async function handleSubscriptionPage(request, user = null) {
             <div class=atob('c3Vic2NyaXB0aW9uLXVybA==') id="clientSubscriptionUrl"></div>
         </div>
         <div class="card">
-            <h2 class="card-title">[ 快速获取 ]</h2>
-            <button class="generate-btn" onclick="getBase64Subscription()">获取订阅链接</button>
+            <h2 class="card-title">[ Get quickly ]</h2>
+            <button class="generate-btn" onclick="getBase64Subscription()">Get subscription link</button>
             <div class=atob('c3Vic2NyaXB0aW9uLXVybA==') id="base64SubscriptionUrl"></div>
         </div>
         <div class="card">
-            <h2 class="card-title">[ 系统状态 ]</h2>
+            <h2 class="card-title">[ System status ]</h2>
             <div id="systemStatus" style="margin: 20px 0; padding: 15px; background: rgba(0, 20, 0, 0.8); border: 2px solid #00ff00; box-shadow: 0 0 20px rgba(0, 255, 0, 0.3), inset 0 0 15px rgba(0, 255, 0, 0.1); position: relative; overflow: hidden;">
-                <div style="color: #00ff00; margin-bottom: 15px; font-weight: bold; text-shadow: 0 0 5px #00ff00;">[ 系统检测中... ]</div>
-                <div id="regionStatus" style="margin: 8px 0; color: #00ff00; font-family: 'Courier New', monospace; text-shadow: 0 0 3px #00ff00;">Worker地区: 检测中...</div>
-                <div id="geoInfo" style="margin: 8px 0; color: #00aa00; font-family: 'Courier New', monospace; font-size: 0.9rem; text-shadow: 0 0 3px #00aa00;">检测方式: 检测中...</div>
-                <div id="backupStatus" style="margin: 8px 0; color: #00ff00; font-family: 'Courier New', monospace; text-shadow: 0 0 3px #00ff00;">ProxyIP状态: 检测中...</div>
-                <div id="currentIP" style="margin: 8px 0; color: #00ff00; font-family: 'Courier New', monospace; text-shadow: 0 0 3px #00ff00;">当前使用IP: 检测中...</div>
-                <div id="regionMatch" style="margin: 8px 0; color: #00ff00; font-family: 'Courier New', monospace; text-shadow: 0 0 3px #00ff00;">地区匹配: 检测中...</div>
-                <div id="selectionLogic" style="margin: 8px 0; color: #00aa00; font-family: 'Courier New', monospace; font-size: 0.9rem; text-shadow: 0 0 3px #00aa00;">选择逻辑: 同地区 → 邻近地区 → 其他地区</div>
+                <div style="color: #00ff00; margin-bottom: 15px; font-weight: bold; text-shadow: 0 0 5px #00ff00;">[ System testing in progress... ]</div>
+                <div id="regionStatus" style="margin: 8px 0; color: #00ff00; font-family: 'Courier New', monospace; text-shadow: 0 0 3px #00ff00;">Worker area: During testing...</div>
+                <div id="geoInfo" style="margin: 8px 0; color: #00aa00; font-family: 'Courier New', monospace; font-size: 0.9rem; text-shadow: 0 0 3px #00aa00;">Detection method: During testing...</div>
+                <div id="backupStatus" style="margin: 8px 0; color: #00ff00; font-family: 'Courier New', monospace; text-shadow: 0 0 3px #00ff00;">ProxyIP status: During testing...</div>
+                <div id="currentIP" style="margin: 8px 0; color: #00ff00; font-family: 'Courier New', monospace; text-shadow: 0 0 3px #00ff00;">当 Previously used IP: During testing...</div>
+                <div id="regionMatch" style="margin: 8px 0; color: #00ff00; font-family: 'Courier New', monospace; text-shadow: 0 0 3px #00ff00;">Region matching: During testing...</div>
+                <div id="selectionLogic" style="margin: 8px 0; color: #00aa00; font-family: 'Courier New', monospace; font-size: 0.9rem; text-shadow: 0 0 3px #00aa00;">Selection Logic: same region → Neighboring areas → Other regions</div>
             </div>
         </div>
         <div class="card" id="configCard" style="display: none;">
-            <h2 class="card-title">[ 配置管理 ]</h2>
+            <h2 class="card-title">[ Configuration Management ]</h2>
             <div id="kvStatus" style="margin-bottom: 20px; padding: 10px; background: rgba(0, 20, 0, 0.8); border: 1px solid #00ff00; color: #00ff00;">
-                检测KV状态中...
+                Detecting KV status...
             </div>
             <div id="configContent" style="display: none;">
                 <form id="regionForm" style="margin-bottom: 20px;">
                     <div style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">指定地区 (wk):</label>
+                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">Designated area (wk):</label>
                         <select id="wkRegion" style="width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff00; color: #00ff00; font-family: 'Courier New', monospace; font-size: 14px;">
-                            <option value="">自动检测</option>
-                            <option value="US">🇺🇸 美国</option>
-                            <option value="SG">🇸🇬 新加坡</option>
-                            <option value="JP">🇯🇵 日本</option>
-                            <option value="HK">🇭🇰 香港</option>
-                            <option value="KR">🇰🇷 韩国</option>
-                            <option value="DE">🇩🇪 德国</option>
-                            <option value="SE">🇸🇪 瑞典</option>
-                            <option value="NL">🇳🇱 荷兰</option>
-                            <option value="FI">🇫🇮 芬兰</option>
-                            <option value="GB">🇬🇧 英国</option>
+                            <option value="">Automatic detection</option>
+                            <option value="US">🇺🇸 USA</option>
+                            <option value="SG">🇸🇬 Singapore</option>
+                            <option value="JP">🇯🇵 Japan</option>
+                            <option value="HK">🇭🇰 Hongkong</option>
+                            <option value="KR">🇰🇷 South Korea</option>
+                            <option value="DE">🇩🇪 Germany</option>
+                            <option value="SE">🇸🇪 Sweden</option>
+                            <option value="NL">🇳🇱 Netherlands</option>
+                            <option value="FI">🇫🇮 Finland</option>
+                            <option value="GB">🇬🇧 U.K.</option>
                         </select>
-                        <small id="wkRegionHint" style="color: #00aa00; font-size: 0.85rem; display: none;">⚠️ 使用自定义ProxyIP时，地区选择已禁用</small>
+                        <small id="wkRegionHint" style="color: #00aa00; font-size: 0.85rem; display: none;">⚠️ When using a custom ProxyIP，Region selection is disabled</small>
                     </div>
-                    <button type="submit" style="background: rgba(0, 255, 0, 0.15); border: 2px solid #00ff00; padding: 12px 24px; color: #00ff00; font-family: 'Courier New', monospace; font-weight: bold; cursor: pointer; margin-right: 10px; text-shadow: 0 0 8px #00ff00; transition: all 0.4s ease;">保存地区配置</button>
+                    <button type="submit" style="background: rgba(0, 255, 0, 0.15); border: 2px solid #00ff00; padding: 12px 24px; color: #00ff00; font-family: 'Courier New', monospace; font-weight: bold; cursor: pointer; margin-right: 10px; text-shadow: 0 0 8px #00ff00; transition: all 0.4s ease;">Save region configuration</button>
                 </form>
                 <form id="otherConfigForm" style="margin-bottom: 20px;">
                     <div style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">协议选择:</label>
+                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">Protocol Selection:</label>
                         <div style="padding: 15px; background: rgba(0, 20, 0, 0.6); border: 1px solid #00ff00; border-radius: 5px;">
                             <div style="margin-bottom: 10px;">
                                 <label style="display: inline-flex; align-items: center; cursor: pointer; color: #00ff00;">
                                     <input type="checkbox" id="ev" checked style="margin-right: 8px; width: 18px; height: 18px; cursor: pointer;">
-                                    <span style="font-size: 1.1rem;">启用 VLESS 协议</span>
+                                    <span style="font-size: 1.1rem;">Enable VLESS protocol</span>
                                 </label>
                             </div>
                             <div style="margin-bottom: 10px;">
                                 <label style="display: inline-flex; align-items: center; cursor: pointer; color: #00ff00;">
                                     <input type="checkbox" id="et" style="margin-right: 8px; width: 18px; height: 18px; cursor: pointer;">
-                                    <span style="font-size: 1.1rem;">启用 Trojan 协议</span>
+                                    <span style="font-size: 1.1rem;">Enable Trojan protocol</span>
                                 </label>
                             </div>
                             <div style="margin-bottom: 10px;">
                                 <label style="display: inline-flex; align-items: center; cursor: pointer; color: #00ff00;">
                                     <input type="checkbox" id="ex" style="margin-right: 8px; width: 18px; height: 18px; cursor: pointer;">
-                                    <span style="font-size: 1.1rem;">启用 xhttp 协议</span>
+                                    <span style="font-size: 1.1rem;">Enable xhttp protocol</span>
                                 </label>
                             </div>
                             <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(0, 255, 0, 0.3);">
-                                <label style="display: block; margin-bottom: 8px; color: #00ff00; font-size: 0.95rem;">Trojan 密码 (可选):</label>
-                                <input type="text" id="tp" placeholder="留空则自动使用 UUID" style="width: 100%; padding: 10px; background: rgba(0, 0, 0, 0.8); border: 1px solid #00ff00; color: #00ff00; font-family: 'Courier New', monospace; font-size: 13px;">
-                                <small style="color: #00aa00; font-size: 0.8rem; display: block; margin-top: 5px;">设置自定义 Trojan 密码。留空则使用 UUID。客户端会自动对密码进行 SHA224 哈希。</small>
+                                <label style="display: block; margin-bottom: 8px; color: #00ff00; font-size: 0.95rem;">Trojan password (Optional):</label>
+                                <input type="text" id="tp" placeholder="Leave it blank and it will be used automatically UUID" style="width: 100%; padding: 10px; background: rgba(0, 0, 0, 0.8); border: 1px solid #00ff00; color: #00ff00; font-family: 'Courier New', monospace; font-size: 13px;">
+                                <small style="color: #00aa00; font-size: 0.8rem; display: block; margin-top: 5px;">Custom settings Trojan password. If left blank, a UUID will be used. The client will automatically process the password. SHA224 Hash.</small>
                             </div>
-                            <small style="color: #00aa00; font-size: 0.85rem; display: block; margin-top: 10px;">可以同时启用多个协议。订阅将生成选中协议的节点。<br>• VLESS WS: 基于 atob('V2ViU29ja2V0') 的标准协议<br>• Trojan: 使用 SHA224 密码认证<br>• xhttp: 基于 HTTP POST 的伪装协议（需要绑定自定义域名并开启 gRPC）</small>
+                            <small style="color: #00aa00; font-size: 0.85rem; display: block; margin-top: 10px;">Multiple protocols can be enabled simultaneously.  Subscribing will generate nodes for the selected protocol.<br>• VLESS WS: based on atob('V2ViU29ja2V0') standard protocol<br>• Trojan: Use SHA224 password authentication<br>• xhttp: based on HTTP POST fake protocol（You need to bind a custom domain name and enable it gRPC）</small>
                         </div>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">自定义路径 (d):</label>
-                        <input type="text" id="customPath" placeholder="例如: /mypath 或留空使用 UUID" style="width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff00; color: #00ff00; font-family: 'Courier New', monospace; font-size: 14px;">
-                        <small style="color: #00aa00; font-size: 0.85rem;">自定义订阅路径。留空则使用 UUID 作为路径。</small>
+                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">Custom path (d):</label>
+                        <input type="text" id="customPath" placeholder="For example: /mypath Or leave blank UUID" style="width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff00; color: #00ff00; font-family: 'Courier New', monospace; font-size: 14px;">
+                        <small style="color: #00aa00; font-size: 0.85rem;">Customize the subscription path. If left blank, use UUID As a path.</small>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">自定义ProxyIP (p):</label>
-                        <input type="text" id="customIP" placeholder="例如: 1.2.3.4:443" style="width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff00; color: #00ff00; font-family: 'Courier New', monospace; font-size: 14px;">
-                        <small style="color: #00aa00; font-size: 0.85rem;">自定义ProxyIP地址和端口</small>
+                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">Custom ProxyIP (p):</label>
+                        <input type="text" id="customIP" placeholder="For example: 1.2.3.4:443" style="width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff00; color: #00ff00; font-family: 'Courier New', monospace; font-size: 14px;">
+                        <small style="color: #00aa00; font-size: 0.85rem;">Custom ProxyIP address and port</small>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">优选IP列表 (yx):</label>
-                        <input type="text" id="preferredIPs" placeholder="例如: 1.2.3.4:443#香港节点,5.6.7.8:80#美国节点,example.com:8443#新加坡节点" style="width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff00; color: #00ff00; font-family: 'Courier New', monospace; font-size: 14px;">
-                        <small style="color: #00aa00; font-size: 0.85rem;">格式: IP:端口#节点名称 或 IP:端口 (无#则使用默认名称)。支持多个，用逗号分隔。<span style="color: #ffaa00;">API添加的IP会自动显示在这里。</span></small>
+                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">Preferred IP List (yx):</label>
+                        <input type="text" id="preferredIPs" placeholder="For example: 1.2.3.4:443#HongKong node,5.6.7.8:80#USA node,example.com:8443#Singapore node" style="width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff00; color: #00ff00; font-family: 'Courier New', monospace; font-size: 14px;">
+                        <small style="color: #00aa00; font-size: 0.85rem;">Format: IP:port#node name or IP:port (If no # is specified, the default name will be used).Support multiple，Separate with commas.<span style="color: #ffaa00;">The IPs added via the API will be automatically displayed here.</span></small>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">优选IP来源URL (yxURL):</label>
-                        <input type="text" id="preferredIPsURL" placeholder="默认: https://raw.githubusercontent.com/qwer-search/bestip/refs/heads/main/kejilandbestip.txt" style="width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff00; color: #00ff00; font-family: 'Courier New', monospace; font-size: 14px;">
-                        <small style="color: #00aa00; font-size: 0.85rem;">自定义优选IP列表来源URL，留空则使用默认地址</small>
+                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">Preferred IP source URL (yxURL):</label>
+                        <input type="text" id="preferredIPsURL" placeholder="default: https://raw.githubusercontent.com/qwer-search/bestip/refs/heads/main/kejilandbestip.txt" style="width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff00; color: #00ff00; font-family: 'Courier New', monospace; font-size: 14px;">
+                        <small style="color: #00aa00; font-size: 0.85rem;">Custom preferred IP list source URL，If left blank, the default address will be used.</small>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">SOCKS5配置 (s):</label>
-                        <input type="text" id="socksConfig" placeholder="例如: user:pass@host:port 或 host:port" style="width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff00; color: #00ff00; font-family: 'Courier New', monospace; font-size: 14px;">
-                        <small style="color: #00aa00; font-size: 0.85rem;">SOCKS5代理地址，用于转发所有出站流量</small>
+                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">SOCKS5 configuration (s):</label>
+                        <input type="text" id="socksConfig" placeholder="For example: user:pass@host:port or host:port" style="width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff00; color: #00ff00; font-family: 'Courier New', monospace; font-size: 14px;">
+                        <small style="color: #00aa00; font-size: 0.85rem;">SOCKS5 proxy address，Used to forward all outbound traffic</small>
                     </div>
-                    <button type="submit" style="background: rgba(0, 255, 0, 0.15); border: 2px solid #00ff00; padding: 12px 24px; color: #00ff00; font-family: 'Courier New', monospace; font-weight: bold; cursor: pointer; margin-right: 10px; text-shadow: 0 0 8px #00ff00; transition: all 0.4s ease;">保存配置</button>
+                    <button type="submit" style="background: rgba(0, 255, 0, 0.15); border: 2px solid #00ff00; padding: 12px 24px; color: #00ff00; font-family: 'Courier New', monospace; font-weight: bold; cursor: pointer; margin-right: 10px; text-shadow: 0 0 8px #00ff00; transition: all 0.4s ease;">Save configuration</button>
                 </form>
                 
-                <h3 style="color: #00ff00; margin: 20px 0 15px 0; font-size: 1.2rem;">高级控制</h3>
+                <h3 style="color: #00ff00; margin: 20px 0 15px 0; font-size: 1.2rem;">Advanced Control</h3>
                 <form id="advancedConfigForm" style="margin-bottom: 20px;">
                     <div style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">订阅转换地址:</label>
-                        <input type="text" id="scu" placeholder="默认: https://url.v1.mk/sub" style="width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff00; color: #00ff00; font-family: 'Courier New', monospace; font-size: 14px;">
-                        <small style="color: #00aa00; font-size: 0.85rem;">自定义订阅转换API地址，留空则使用默认地址</small>
+                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">Subscription conversion address:</label>
+                        <input type="text" id="scu" placeholder="default: https://url.v1.mk/sub" style="width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff00; color: #00ff00; font-family: 'Courier New', monospace; font-size: 14px;">
+                        <small style="color: #00aa00; font-size: 0.85rem;">Custom subscription conversion API address，If left blank, the default address will be used.</small>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">内置优选类型:</label>
+                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">Built-in preferred type:</label>
                         <div style="padding: 15px; background: rgba(0, 20, 0, 0.6); border: 1px solid #00ff00; border-radius: 5px;">
                             <div style="margin-bottom: 10px;">
                                 <label style="display: inline-flex; align-items: center; cursor: pointer; color: #00ff00;">
                                     <input type="checkbox" id="epd" checked style="margin-right: 8px; width: 18px; height: 18px; cursor: pointer;">
-                                    <span style="font-size: 1.1rem;">启用优选域名</span>
+                                    <span style="font-size: 1.1rem;">Enable preferred domain name</span>
                                 </label>
                             </div>
                             <div style="margin-bottom: 10px;">
                                 <label style="display: inline-flex; align-items: center; cursor: pointer; color: #00ff00;">
                                     <input type="checkbox" id="epi" checked style="margin-right: 8px; width: 18px; height: 18px; cursor: pointer;">
-                                    <span style="font-size: 1.1rem;">启用优选 IP</span>
+                                    <span style="font-size: 1.1rem;">Enable Preferred IP</span>
                                 </label>
                             </div>
                             <div style="margin-bottom: 10px;">
                                 <label style="display: inline-flex; align-items: center; cursor: pointer; color: #00ff00;">
                                     <input type="checkbox" id="egi" checked style="margin-right: 8px; width: 18px; height: 18px; cursor: pointer;">
-                                    <span style="font-size: 1.1rem;">启用 GitHub 默认优选</span>
+                                    <span style="font-size: 1.1rem;">Enable GitHub default preference</span>
                                 </label>
                             </div>
-                            <small style="color: #00aa00; font-size: 0.85rem; display: block; margin-top: 10px;">控制订阅中包含哪些内置优选节点。默认全部启用。</small>
+                            <small style="color: #00aa00; font-size: 0.85rem; display: block; margin-top: 10px;">Control which built-in preferred nodes are included in the subscription. All are enabled by default.</small>
                         </div>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">允许API管理 (ae):</label>
+                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">Allow API management (ae):</label>
                         <select id="apiEnabled" style="width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff00; color: #00ff00; font-family: 'Courier New', monospace; font-size: 14px;">
-                            <option value="">默认（关闭API）</option>
-                            <option value="yes">开启API管理</option>
+                            <option value="">default（Close API）</option>
+                            <option value="yes">Enable API Management</option>
                         </select>
-                        <small style="color: #ffaa00; font-size: 0.85rem;">⚠️ 安全提醒：开启后允许通过API动态添加优选IP。建议仅在需要时开启。</small>
+                        <small style="color: #ffaa00; font-size: 0.85rem;">⚠️ Safety Reminder：Once enabled, it allows for the dynamic addition of preferred IPs via API. It is recommended to enable this feature only when necessary.</small>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">地区匹配 (rm):</label>
+                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">Region matching (rm):</label>
                         <select id="regionMatching" style="width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff00; color: #00ff00; font-family: 'Courier New', monospace; font-size: 14px;">
-                            <option value="">默认（启用地区匹配）</option>
-                            <option value="no">关闭地区匹配</option>
+                            <option value="">default（Enable region matching）</option>
+                            <option value="no">Disable region matching</option>
                         </select>
-                        <small style="color: #00aa00; font-size: 0.85rem;">设置为"关闭"时不进行地区智能匹配</small>
+                        <small style="color: #00aa00; font-size: 0.85rem;">When set to "Off", intelligent region matching is disabled</small>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">降级控制 (qj):</label>
+                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">Degradation control (qj):</label>
                         <select id="downgradeControl" style="width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff00; color: #00ff00; font-family: 'Courier New', monospace; font-size: 14px;">
-                            <option value="">默认（不启用降级）</option>
-                            <option value="no">启用降级模式</option>
+                            <option value="">default（Do not enable downgrade）</option>
+                            <option value="no">Enable downgrade mode</option>
                         </select>
-                        <small style="color: #00aa00; font-size: 0.85rem;">设置为"启用"时：CF直连失败→SOCKS5连接→fallback地址</small>
+                        <small style="color: #00aa00; font-size: 0.85rem;">When set to "Enable"：CF direct connection failed → SOCKS5 connection→fallback address</small>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">TLS控制 (dkby):</label>
+                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">TLS control (dkby):</label>
                         <select id="portControl" style="width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff00; color: #00ff00; font-family: 'Courier New', monospace; font-size: 14px;">
-                            <option value="">默认（保留所有节点）</option>
-                            <option value="yes">仅TLS节点</option>
+                            <option value="">default（Keep all nodes）</option>
+                            <option value="yes">TLS node only</option>
                         </select>
-                        <small style="color: #00aa00; font-size: 0.85rem;">设置为"仅TLS节点"时只生成带TLS的节点，不生成非TLS节点（如80端口）</small>
+                        <small style="color: #00aa00; font-size: 0.85rem;">When set to "TLS-only node", only nodes with TLS will be generated，Do not generate non-TLS nodes (such as port 80)</small>
                     </div>
                     <div style="margin-bottom: 15px;">
-                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">优选控制 (yxby):</label>
+                        <label style="display: block; margin-bottom: 8px; color: #00ff00; font-weight: bold; text-shadow: 0 0 3px #00ff00;">Preferred control (yxby):</label>
                         <select id="preferredControl" style="width: 100%; padding: 12px; background: rgba(0, 0, 0, 0.8); border: 2px solid #00ff00; color: #00ff00; font-family: 'Courier New', monospace; font-size: 14px;">
-                            <option value="">默认（启用优选）</option>
-                            <option value="yes">关闭优选</option>
+                            <option value="">default（Enable Preferred）</option>
+                            <option value="yes">Close preferred</option>
                         </select>
-                        <small style="color: #00aa00; font-size: 0.85rem;">设置为"关闭优选"时只使用原生地址，不生成优选IP和域名节点</small>
+                        <small style="color: #00aa00; font-size: 0.85rem;">When set to "Disable Preferred", only native addresses are used，Do not generate preferred IP and domain name nodes</small>
                     </div>
-                    <button type="submit" style="background: rgba(0, 255, 0, 0.15); border: 2px solid #00ff00; padding: 12px 24px; color: #00ff00; font-family: 'Courier New', monospace; font-weight: bold; cursor: pointer; margin-right: 10px; text-shadow: 0 0 8px #00ff00; transition: all 0.4s ease;">保存高级配置</button>
+                    <button type="submit" style="background: rgba(0, 255, 0, 0.15); border: 2px solid #00ff00; padding: 12px 24px; color: #00ff00; font-family: 'Courier New', monospace; font-weight: bold; cursor: pointer; margin-right: 10px; text-shadow: 0 0 8px #00ff00; transition: all 0.4s ease;">Save advanced configuration</button>
                 </form>
                 <div id="currentConfig" style="background: rgba(0, 0, 0, 0.9); border: 1px solid #00ff00; padding: 15px; margin: 10px 0; font-family: 'Courier New', monospace; color: #00ff00;">
-                    加载中...
+                    loading...
                 </div>
                 <div id="pathTypeInfo" style="background: rgba(0, 20, 0, 0.7); border: 1px solid #00ff00; padding: 15px; margin: 10px 0; font-family: 'Courier New', monospace; color: #00ff00;">
-                    <div style="font-weight: bold; margin-bottom: 8px; color: #44ff44; text-shadow: 0 0 5px #44ff44;">📍 当前路径配置</div>
-                    <div id="pathTypeStatus">检测中...</div>
+                    <div style="font-weight: bold; margin-bottom: 8px; color: #44ff44; text-shadow: 0 0 5px #44ff44;">📍 Current path configuration</div>
+                    <div id="pathTypeStatus">During testing...</div>
                 </div>
-                <button onclick="loadCurrentConfig()" style="background: rgba(0, 255, 0, 0.15); border: 2px solid #00ff00; padding: 12px 24px; color: #00ff00; font-family: 'Courier New', monospace; font-weight: bold; cursor: pointer; margin-right: 10px; text-shadow: 0 0 8px #00ff00; transition: all 0.4s ease;">刷新配置</button>
-                <button onclick="resetAllConfig()" style="background: rgba(255, 0, 0, 0.15); border: 2px solid #ff0000; padding: 12px 24px; color: #ff0000; font-family: 'Courier New', monospace; font-weight: bold; cursor: pointer; text-shadow: 0 0 8px #ff0000; transition: all 0.4s ease;">重置配置</button>
+                <button onclick="loadCurrentConfig()" style="background: rgba(0, 255, 0, 0.15); border: 2px solid #00ff00; padding: 12px 24px; color: #00ff00; font-family: 'Courier New', monospace; font-weight: bold; cursor: pointer; margin-right: 10px; text-shadow: 0 0 8px #00ff00; transition: all 0.4s ease;">Refresh Configuration</button>
+                <button onclick="resetAllConfig()" style="background: rgba(255, 0, 0, 0.15); border: 2px solid #ff0000; padding: 12px 24px; color: #ff0000; font-family: 'Courier New', monospace; font-weight: bold; cursor: pointer; text-shadow: 0 0 8px #ff0000; transition: all 0.4s ease;">Reset configuration</button>
             </div>
             <div id="statusMessage" style="display: none; padding: 10px; margin: 10px 0; border: 1px solid #00ff00; background: rgba(0, 20, 0, 0.8); color: #00ff00; text-shadow: 0 0 5px #00ff00;"></div>
         </div>
         
         <div class="card">
-            <h2 class="card-title">[ 相关链接 ]</h2>
+            <h2 class="card-title">[ Related Links ]</h2>
             <div style="text-align: center; margin: 20px 0;">
-                <a href="https://github.com/byJoey/cfnew" target="_blank" style="color: #00ff00; text-decoration: none; margin: 0 20px; font-size: 1.2rem; text-shadow: 0 0 5px #00ff00;">GitHub 项目</a>
-                <a href="https://www.youtube.com/@joeyblog" target="_blank" style="color: #00ff00; text-decoration: none; margin: 0 20px; font-size: 1.2rem; text-shadow: 0 0 5px #00ff00;">YouTube @joeyblog</a>
+                <a href="https://t.me/club_gratis" target="_blank" style="color: #00ff00; text-decoration: none; margin: 0 20px; font-size: 1.2rem; text-shadow: 0 0 5px #00ff00;">Telegram</a>
+                <a href="https://www.youtube.com/@mrkingsofficial6366" target="_blank" style="color: #00ff00; text-decoration: none; margin: 0 20px; font-size: 1.2rem; text-shadow: 0 0 5px #00ff00;">YouTube @mrkings</a>
             </div>
         </div>
     </div>
     <script>
-        // 订阅转换地址（从服务器配置注入）
+        // Subscription conversion address（Inject from server configuration）
         var SUB_CONVERTER_URL = "${ scu }";
         
         function generateClientLink(clientType) {
@@ -2043,7 +2043,7 @@ async function handleSubscriptionPage(request, user = null) {
                     if (clientType === atob('c3VyZ2U=')) displayName = 'SURGE';
                     if (clientType === atob('c2luZ2JveA==')) displayName = 'SING-BOX';
                     if (clientType === atob('cXVhbng=')) displayName = 'QUANTUMULT X';
-                    alert(displayName + " 订阅链接已复制");
+                    alert(displayName + " Subscription link has been copied");
                 });
             }
         }
@@ -2059,11 +2059,11 @@ async function handleSubscriptionPage(request, user = null) {
                     document.getElementById("base64SubscriptionUrl").textContent = base64Content;
                     document.getElementById("base64SubscriptionUrl").style.display = "block";
                     navigator.clipboard.writeText(base64Content).then(function() {
-                        alert("Base64订阅内容已复制");
+                        alert("Base64 subscription content has been copied");
                     });
                 })
                 .catch(function(error) {
-                    alert("获取订阅失败，请重试");
+                    alert("Subscription failed，Please try again");
                 });
         }
         
@@ -2119,12 +2119,12 @@ async function handleSubscriptionPage(request, user = null) {
                 const regionMatch = document.getElementById('regionMatch');
                 
                 const regionNames = {
-                    'US': '🇺🇸 美国', 'SG': '🇸🇬 新加坡', 'JP': '🇯🇵 日本', 'HK': '🇭🇰 香港',
-                    'KR': '🇰🇷 韩国', 'DE': '🇩🇪 德国', 'SE': '🇸🇪 瑞典', 'NL': '🇳🇱 荷兰',
-                    'FI': '🇫🇮 芬兰', 'GB': '🇬🇧 英国'
+                    'US': '🇺🇸 USA', 'SG': '🇸🇬 Singapore', 'JP': '🇯🇵 Japan', 'HK': '🇭🇰 Hongkong',
+                    'KR': '🇰🇷 South Korea', 'DE': '🇩🇪 Germany', 'SE': '🇸🇪 Sweden', 'NL': '🇳🇱 Netherlands',
+                    'FI': '🇫🇮 Finland', 'GB': '🇬🇧 U.K.'
                 };
                 
-                let detectedRegion = 'US'; // 默认值
+                let detectedRegion = 'US'; // default value
                 let isCustomIPMode = false;
                 let isManualRegionMode = false;
                 try {
@@ -2135,62 +2135,62 @@ async function handleSubscriptionPage(request, user = null) {
                         isCustomIPMode = true;
                         detectedRegion = 'CUSTOM';
                         
-                        // 获取自定义IP的详细信息
-                        const customIPInfo = data.ci || '未知';
+                        // Get detailed information about a custom IP
+                        const customIPInfo = data.ci || 'unknown';
                         
-                        geoInfo.innerHTML = '检测方式: <span style="color: #ffaa00;">⚙️ 自定义ProxyIP模式 (p变量启用)</span>';
-                        regionStatus.innerHTML = 'Worker地区: <span style="color: #ffaa00;">🔧 自定义IP模式 (已禁用地区匹配)</span>';
+                        geoInfo.innerHTML = 'Detection method: <span style="color: #ffaa00;">⚙️ Custom ProxyIP mode (p variable enabled)</span>';
+                        regionStatus.innerHTML = 'Worker area: <span style="color: #ffaa00;">🔧 Custom IP mode (Region matching has been disabled)</span>';
                         
-                        // 显示自定义IP配置状态，包含具体IP
-                        if (backupStatus) backupStatus.innerHTML = 'ProxyIP状态: <span style="color: #ffaa00;">🔧 使用自定义ProxyIP: ' + customIPInfo + '</span>';
-                        if (currentIP) currentIP.innerHTML = '当前使用IP: <span style="color: #ffaa00;">✅ ' + customIPInfo + ' (p变量配置)</span>';
-                        if (regionMatch) regionMatch.innerHTML = '地区匹配: <span style="color: #ffaa00;">⚠️ 自定义IP模式，地区选择已禁用</span>';
+                        // Displays the status of custom IP configurations, including the specific IP address
+                        if (backupStatus) backupStatus.innerHTML = 'ProxyIP status: <span style="color: #ffaa00;">🔧 Use a custom ProxyIP: ' + customIPInfo + '</span>';
+                        if (currentIP) currentIP.innerHTML = 'Current IP address: <span style="color: #ffaa00;">✅ ' + customIPInfo + ' (p variable configuration)</span>';
+                        if (regionMatch) regionMatch.innerHTML = 'Region matching: <span style="color: #ffaa00;">⚠️ Custom IP mode，Region selection is disabled</span>';
                         
-                        return; // 提前返回，不执行后续的地区匹配逻辑
-                    } else if (data.detectionMethod === '手动指定地区') {
+                        return; // Return early，Do not execute subsequent region matching logic
+                    } else if (data.detectionMethod === 'Manually specify region') {
                         isManualRegionMode = true;
                         detectedRegion = data.region;
                         
-                        geoInfo.innerHTML = '检测方式: <span style="color: #44aa44;">手动指定地区</span>';
-                        regionStatus.innerHTML = 'Worker地区: <span style="color: #44ff44;">🎯 ' + regionNames[detectedRegion] + ' (手动指定)</span>';
+                        geoInfo.innerHTML = 'Detection method: <span style="color: #44aa44;">Manually specify region</span>';
+                        regionStatus.innerHTML = 'Worker area: <span style="color: #44ff44;">🎯 ' + regionNames[detectedRegion] + ' (Manually specify)</span>';
                         
-                        // 显示配置状态而不是检测状态
-                        if (backupStatus) backupStatus.innerHTML = 'ProxyIP状态: <span style="color: #44ff44;">✅ 10/10 可用 (ProxyIP域名预设可用)</span>';
-                        if (currentIP) currentIP.innerHTML = '当前使用IP: <span style="color: #44ff44;">✅ 智能就近选择中</span>';
-                        if (regionMatch) regionMatch.innerHTML = '地区匹配: <span style="color: #44ff44;">✅ 同地区IP可用 (1个)</span>';
+                        // Display configuration status instead of detection status
+                        if (backupStatus) backupStatus.innerHTML = 'ProxyIP status: <span style="color: #44ff44;">✅ 10/10 Available (ProxyIP domain name is available by default)</span>';
+                        if (currentIP) currentIP.innerHTML = 'Current IP address: <span style="color: #44ff44;">✅ Intelligent selection of the nearest location</span>';
+                        if (regionMatch) regionMatch.innerHTML = 'Region matching: <span style="color: #44ff44;">✅ IP addresses available in the same region (1)</span>';
                         
-                        return; // 提前返回，不执行后续的地区匹配逻辑
+                        return; // Return early，Do not execute subsequent region matching logic
                     } else if (data.region && regionNames[data.region]) {
                         detectedRegion = data.region;
                     }
                     
-                    geoInfo.innerHTML = '检测方式: <span style="color: #44ff44;">Cloudflare内置检测</span>';
+                    geoInfo.innerHTML = 'Detection method: <span style="color: #44ff44;">Cloudflare built-in detection</span>';
                     
                 } catch (e) {
-                    geoInfo.innerHTML = '检测方式: <span style="color: #ff4444;">检测失败</span>';
+                    geoInfo.innerHTML = 'Detection method: <span style="color: #ff4444;">Detection failed</span>';
                 }
                 
-                regionStatus.innerHTML = 'Worker地区: <span style="color: #44ff44;">✅ ' + regionNames[detectedRegion] + '</span>';
+                regionStatus.innerHTML = 'Worker area: <span style="color: #44ff44;">✅ ' + regionNames[detectedRegion] + '</span>';
                 
-                // 直接显示配置状态，不再进行检测
+                // The configuration status is displayed directly, and no further checks are performed
                 if (backupStatus) {
-                    backupStatus.innerHTML = 'ProxyIP状态: <span style="color: #44ff44;">✅ 10/10 可用 (ProxyIP域名预设可用)</span>';
+                    backupStatus.innerHTML = 'ProxyIP status: <span style="color: #44ff44;">✅ 10/10 Available (ProxyIP domain name is available by default)</span>';
                 }
                 
                 if (currentIP) {
-                    currentIP.innerHTML = '当前使用IP: <span style="color: #44ff44;">✅ 智能就近选择中</span>';
+                    currentIP.innerHTML = 'Current IP address: <span style="color: #44ff44;">✅ Intelligent selection of the nearest location</span>';
                 }
                 
                 if (regionMatch) {
-                    regionMatch.innerHTML = '地区匹配: <span style="color: #44ff44;">✅ 同地区IP可用 (1个)</span>';
+                    regionMatch.innerHTML = 'Region matching: <span style="color: #44ff44;">✅ IP addresses available in the same region (1)</span>';
                 }
                 
             } catch (error) {
-                document.getElementById('regionStatus').innerHTML = 'Worker地区: <span style="color: #ff4444;">❌ 检测失败</span>';
-                document.getElementById('geoInfo').innerHTML = '地理位置: <span style="color: #ff4444;">❌ 检测失败</span>';
-                document.getElementById('backupStatus').innerHTML = 'ProxyIP状态: <span style="color: #ff4444;">❌ 检测失败</span>';
-                document.getElementById('currentIP').innerHTML = '当前使用IP: <span style="color: #ff4444;">❌ 检测失败</span>';
-                document.getElementById('regionMatch').innerHTML = '地区匹配: <span style="color: #ff4444;">❌ 检测失败</span>';
+                document.getElementById('regionStatus').innerHTML = 'Worker area: <span style="color: #ff4444;">❌ Detection failed</span>';
+                document.getElementById('geoInfo').innerHTML = 'Geographical location: <span style="color: #ff4444;">❌ Detection failed</span>';
+                document.getElementById('backupStatus').innerHTML = 'ProxyIP status: <span style="color: #ff4444;">❌ Detection failed</span>';
+                document.getElementById('currentIP').innerHTML = 'Current IP address: <span style="color: #ff4444;">❌ Detection failed</span>';
+                document.getElementById('regionMatch').innerHTML = 'Region matching: <span style="color: #ff4444;">❌ Detection failed</span>';
             }
         }
         
@@ -2200,16 +2200,16 @@ async function handleSubscriptionPage(request, user = null) {
                 const data = await response.json();
                 
                 if (data.detectedRegion) {
-                    alert('API检测结果: ' + data.detectedRegion + '\\n检测时间: ' + data.timestamp);
+                    alert('API test results: ' + data.detectedRegion + '\\n Detection time: ' + data.timestamp);
                 } else {
-                    alert('API检测失败: ' + (data.error || '未知错误'));
+                    alert('API detection failed: ' + (data.error || 'Unknown error'));
                 }
             } catch (error) {
-                alert('API测试失败: ' + error.message);
+                alert('API test failed: ' + error.message);
             }
         }
         
-        // 配置管理相关函数
+        // Configuration management related functions
         async function checkKVStatus() {
             const apiUrl = window.location.pathname + '/api/config';
             
@@ -2217,39 +2217,39 @@ async function handleSubscriptionPage(request, user = null) {
                 const response = await fetch(apiUrl);
                 
                 if (response.status === 503) {
-                    // KV未配置
-                    document.getElementById('kvStatus').innerHTML = '<span style="color: #ffaa00;">⚠️ KV存储未启用或未配置</span>';
+                    // KV not configured
+                    document.getElementById('kvStatus').innerHTML = '<span style="color: #ffaa00;">⚠️ KV storage is not enabled or configured</span>';
                     document.getElementById('configCard').style.display = 'block';
-                    document.getElementById('currentConfig').textContent = 'KV存储未配置，无法使用配置管理功能。\\n\\n请在Cloudflare Workers中:\\n1. 创建KV命名空间\\n2. 绑定环境变量 C\\n3. 重新部署代码';
+                    document.getElementById('currentConfig').textContent = 'KV storage is not configured，Configuration management features are unavailable.\\n\\n Please in Cloudflare Workers:\\n1. Create KV namespace\\n2. Binding environment variables C\\n3. Redeploy code';
                 } else if (response.ok) {
                     try {
                     const data = await response.json();
                     
-                    // 检查响应是否包含KV配置信息
+                    // Check if the response contains KV configuration information
                     if (data && data.kvEnabled === true) {
-                        document.getElementById('kvStatus').innerHTML = '<span style="color: #44ff44;">✅ KV存储已启用，可以使用配置管理功能</span>';
+                        document.getElementById('kvStatus').innerHTML = '<span style="color: #44ff44;">✅ KV storage is now enabled，Configuration management features can be used</span>';
                         document.getElementById('configContent').style.display = 'block';
                         document.getElementById('configCard').style.display = 'block';
                         await loadCurrentConfig();
                     } else {
-                        document.getElementById('kvStatus').innerHTML = '<span style="color: #ffaa00;">⚠️ KV存储未启用或未配置</span>';
+                        document.getElementById('kvStatus').innerHTML = '<span style="color: #ffaa00;">⚠️ KV storage is not enabled or configured</span>';
                         document.getElementById('configCard').style.display = 'block';
-                        document.getElementById('currentConfig').textContent = 'KV存储未配置';
+                        document.getElementById('currentConfig').textContent = 'KV storage not configured';
                         }
                     } catch (jsonError) {
-                        document.getElementById('kvStatus').innerHTML = '<span style="color: #ffaa00;">⚠️ KV存储检测失败</span>';
+                        document.getElementById('kvStatus').innerHTML = '<span style="color: #ffaa00;">⚠️ KV storage detection failed</span>';
                         document.getElementById('configCard').style.display = 'block';
-                        document.getElementById('currentConfig').textContent = 'KV存储检测失败: 响应格式错误';
+                        document.getElementById('currentConfig').textContent = 'KV storage detection failed: Response format error';
                     }
                 } else {
-                    document.getElementById('kvStatus').innerHTML = '<span style="color: #ffaa00;">⚠️ KV存储未启用或未配置</span>';
+                    document.getElementById('kvStatus').innerHTML = '<span style="color: #ffaa00;">⚠️ KV storage is not enabled or configured</span>';
                     document.getElementById('configCard').style.display = 'block';
-                    document.getElementById('currentConfig').textContent = 'KV存储检测失败 - 状态码: ' + response.status;
+                    document.getElementById('currentConfig').textContent = 'KV storage detection failed - status codes: ' + response.status;
                 }
             } catch (error) {
-                document.getElementById('kvStatus').innerHTML = '<span style="color: #ffaa00;">⚠️ KV存储未启用或未配置</span>';
+                document.getElementById('kvStatus').innerHTML = '<span style="color: #ffaa00;">⚠️ KV storage is not enabled or configured</span>';
                 document.getElementById('configCard').style.display = 'block';
-                document.getElementById('currentConfig').textContent = 'KV存储检测失败 - 错误: ' + error.message;
+                document.getElementById('currentConfig').textContent = 'KV storage detection failed - mistake: ' + error.message;
             }
         }
         
@@ -2260,17 +2260,17 @@ async function handleSubscriptionPage(request, user = null) {
                 const response = await fetch(apiUrl);
                 
                 if (response.status === 503) {
-                    document.getElementById('currentConfig').textContent = 'KV存储未配置，无法加载配置';
+                    document.getElementById('currentConfig').textContent = 'KV storage not configured，Unable to load configuration';
                     return;
                 }
                 if (!response.ok) {
                     const errorText = await response.text();
-                    document.getElementById('currentConfig').textContent = '加载配置失败: ' + errorText;
+                    document.getElementById('currentConfig').textContent = 'Configuration loading failed: ' + errorText;
                     return;
                 }
                 const config = await response.json();
                 
-                // 过滤掉内部字段 kvEnabled
+                // Filter out internal fields kvEnabled
                 const displayConfig = {};
                 for (const [key, value] of Object.entries(config)) {
                     if (key !== 'kvEnabled') {
@@ -2278,18 +2278,18 @@ async function handleSubscriptionPage(request, user = null) {
                     }
                 }
                 
-                let configText = '当前配置:\\n';
+                let configText = 'Current configuration:\\n';
                 if (Object.keys(displayConfig).length === 0) {
-                    configText += '(暂无配置)';
+                    configText += '(No configuration available)';
                 } else {
                     for (const [key, value] of Object.entries(displayConfig)) {
-                        configText += key + ': ' + (value || '(未设置)') + '\\n';
+                        configText += key + ': ' + (value || '(Not set)') + '\\n';
                     }
                 }
                 
                 document.getElementById('currentConfig').textContent = configText;
                 
-                // 更新表单值
+                // Update form values
                 document.getElementById('wkRegion').value = config.wk || '';
                 document.getElementById('ev').checked = config.ev !== 'no';
                 document.getElementById('et').checked = config.et === 'yes';
@@ -2310,18 +2310,18 @@ async function handleSubscriptionPage(request, user = null) {
                 document.getElementById('portControl').value = config.dkby || '';
                 document.getElementById('preferredControl').value = config.yxby || '';
                 
-                // 更新路径类型显示
+                // Update path type display
                 updatePathTypeStatus(config.d);
                 
-                // 检查p变量，如果有值则禁用wk地区选择
+                // Check the p variable; if it has a value, disable wk region selection
                 updateWkRegionState();
                 
             } catch (error) {
-                document.getElementById('currentConfig').textContent = '加载配置失败: ' + error.message;
+                document.getElementById('currentConfig').textContent = 'Configuration loading failed: ' + error.message;
             }
         }
         
-        // 更新路径类型显示
+        // Update path type display
         function updatePathTypeStatus(cp) {
             const pathTypeStatus = document.getElementById('pathTypeStatus');
             const currentUrl = window.location.href;
@@ -2329,20 +2329,20 @@ async function handleSubscriptionPage(request, user = null) {
             const currentPath = pathParts.length > 0 ? pathParts[0] : '';
             
             if (cp && cp.trim()) {
-                // 使用自定义路径 (d)
-                pathTypeStatus.innerHTML = '<div style="color: #44ff44;">使用类型: <strong>自定义路径 (d)</strong></div>' +
-                    '<div style="margin-top: 5px; color: #00ff00;">当前路径: <span style="color: #ffaa00;">' + cp + '</span></div>' +
-                    '<div style="margin-top: 5px; font-size: 0.9rem; color: #00aa00;">访问地址: ' + 
+                // Use custom path (d)
+                pathTypeStatus.innerHTML = '<div style="color: #44ff44;">Usage type: <strong>Custom path (d)</strong></div>' +
+                    '<div style="margin-top: 5px; color: #00ff00;">Current path: <span style="color: #ffaa00;">' + cp + '</span></div>' +
+                    '<div style="margin-top: 5px; font-size: 0.9rem; color: #00aa00;">Access address: ' + 
                     (currentUrl.split('/')[0] + '//' + currentUrl.split('/')[2]) + cp + '/sub</div>';
             } else {
-                // 使用 UUID (u)
-                pathTypeStatus.innerHTML = '<div style="color: #44ff44;">使用类型: <strong>UUID 路径 (u)</strong></div>' +
-                    '<div style="margin-top: 5px; color: #00ff00;">当前路径: <span style="color: #ffaa00;">' + (currentPath || '(UUID)') + '</span></div>' +
-                    '<div style="margin-top: 5px; font-size: 0.9rem; color: #00aa00;">访问地址: ' + currentUrl.split('/sub')[0] + '/sub</div>';
+                // use UUID (u)
+                pathTypeStatus.innerHTML = '<div style="color: #44ff44;">Usage type: <strong>UUID path (u)</strong></div>' +
+                    '<div style="margin-top: 5px; color: #00ff00;">Current path: <span style="color: #ffaa00;">' + (currentPath || '(UUID)') + '</span></div>' +
+                    '<div style="margin-top: 5px; font-size: 0.9rem; color: #00aa00;">Access address: ' + currentUrl.split('/sub')[0] + '/sub</div>';
             }
         }
         
-        // 更新wk地区选择的启用/禁用状态
+        // Update the enabled/disabled status of WK region selection
         function updateWkRegionState() {
             const customIPInput = document.getElementById('customIP');
             const wkRegion = document.getElementById('wkRegion');
@@ -2352,12 +2352,12 @@ async function handleSubscriptionPage(request, user = null) {
                 const hasCustomIP = customIPInput.value.trim() !== '';
                 wkRegion.disabled = hasCustomIP;
                 
-                // 添加视觉反馈
+                // Add visual feedback
                 if (hasCustomIP) {
                     wkRegion.style.opacity = '0.5';
                     wkRegion.style.cursor = 'not-allowed';
                     wkRegion.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-                    // 显示提示信息
+                    // Display prompt message
                     if (wkRegionHint) {
                         wkRegionHint.style.display = 'block';
                         wkRegionHint.style.color = '#ffaa00';
@@ -2366,7 +2366,7 @@ async function handleSubscriptionPage(request, user = null) {
                     wkRegion.style.opacity = '1';
                     wkRegion.style.cursor = 'pointer';
                     wkRegion.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-                    // 隐藏提示信息
+                    // Hide hints
                     if (wkRegionHint) {
                         wkRegionHint.style.display = 'none';
                     }
@@ -2386,20 +2386,20 @@ async function handleSubscriptionPage(request, user = null) {
                 
                 
                 if (response.status === 503) {
-                    showStatus('KV存储未配置，无法保存配置。请先在Cloudflare Workers中配置KV存储。', 'error');
+                    showStatus('KV storage is not configured，Unable to save configuration Please check Cloudflare first Configure KV storage in Workers.', 'error');
                     return;
                 }
                 
                 if (!response.ok) {
                     const errorText = await response.text();
                     
-                    // 尝试解析 JSON 错误信息
+                    // Attempt to analyze JSON error message
                     try {
                         const errorData = JSON.parse(errorText);
-                        showStatus(errorData.message || '保存失败', 'error');
+                        showStatus(errorData.message || 'Save failed', 'error');
                     } catch (parseError) {
-                        // 如果不是 JSON，直接显示文本
-                        showStatus('保存失败: ' + errorText, 'error');
+                        // If not JSON，Directly display text
+                        showStatus('Save failed: ' + errorText, 'error');
                     }
                     return;
                 }
@@ -2410,16 +2410,16 @@ async function handleSubscriptionPage(request, user = null) {
                 
                 if (result.success) {
                     await loadCurrentConfig();
-                    // 更新wk地区选择状态
+                    // Update WK region selection status
                     updateWkRegionState();
-                    // 保存成功后刷新页面以更新系统状态
+                    // Refresh the page after successful saving to update the system status
                     setTimeout(function() {
                         window.location.reload();
                     }, 1500);
                 } else {
                 }
             } catch (error) {
-                showStatus('保存失败: ' + error.message, 'error');
+                showStatus('Save failed: ' + error.message, 'error');
             }
         }
         
@@ -2436,7 +2436,7 @@ async function handleSubscriptionPage(request, user = null) {
         }
         
         async function resetAllConfig() {
-            if (confirm('确定要重置所有配置吗？这将清空所有KV配置，恢复为环境变量设置。')) {
+            if (confirm('Are you sure you want to reset all configurations?This will clear all KV configurations，Restore to environment variable settings')) {
                 try {
                     const response = await fetch(window.location.pathname + '/api/config', {
                         method: 'POST',
@@ -2456,38 +2456,38 @@ async function handleSubscriptionPage(request, user = null) {
                     });
                     
                     if (response.status === 503) {
-                        showStatus('KV存储未配置，无法重置配置。', 'error');
+                        showStatus('KV storage is not configured，Unable to reset configuration.', 'error');
                         return;
                     }
                     
                     if (!response.ok) {
                         const errorText = await response.text();
                         
-                        // 尝试解析 JSON 错误信息
+                        // Attempting to parse JSON error message
                         try {
                             const errorData = JSON.parse(errorText);
-                            showStatus(errorData.message || '重置失败', 'error');
+                            showStatus(errorData.message || 'Reset failed', 'error');
                         } catch (parseError) {
-                            // 如果不是 JSON，直接显示文本
-                            showStatus('重置失败: ' + errorText, 'error');
+                            // If it's not JSON, display the text directly
+                            showStatus('Reset failed: ' + errorText, 'error');
                         }
                         return;
                     }
                     
                     const result = await response.json();
-                    showStatus(result.message || '配置已重置', result.success ? 'success' : 'error');
+                    showStatus(result.message || 'Configuration has been reset', result.success ? 'success' : 'error');
                     
                     if (result.success) {
                         await loadCurrentConfig();
-                        // 更新wk地区选择状态
+                        // Update WK region selection status
                         updateWkRegionState();
-                        // 刷新页面以更新系统状态
+                        // Refresh the page to update system status
                         setTimeout(function() {
                             window.location.reload();
                         }, 1500);
                     }
                 } catch (error) {
-                    showStatus('重置失败: ' + error.message, 'error');
+                    showStatus('Reset failed: ' + error.message, 'error');
                 }
             }
         }
@@ -2497,7 +2497,7 @@ async function handleSubscriptionPage(request, user = null) {
             checkSystemStatus();
             checkKVStatus();
             
-            // 监听customIP输入框变化，实时更新wk地区选择状态
+            // Listen for changes in the customIP input box，Real-time updates on WK region selection status
             const customIPInput = document.getElementById('customIP');
             if (customIPInput) {
                 customIPInput.addEventListener('input', function() {
@@ -2505,7 +2505,7 @@ async function handleSubscriptionPage(request, user = null) {
                 });
             }
             
-            // 绑定表单事件
+            // Bind form events
             const regionForm = document.getElementById('regionForm');
             if (regionForm) {
                 regionForm.addEventListener('submit', async function(e) {
@@ -2527,11 +2527,11 @@ async function handleSubscriptionPage(request, user = null) {
                         s: document.getElementById('socksConfig').value
                     };
                     
-                    // 确保至少选择一个协议
+                    // Ensure that at least one protocol is selected
                     if (!document.getElementById('ev').checked && 
                         !document.getElementById('et').checked && 
                         !document.getElementById('ex').checked) {
-                        alert('至少需要启用一个协议！');
+                        alert('At least one protocol needs to be enabled！');
                         return;
                     }
                     
@@ -3222,7 +3222,7 @@ function generateLinksFromNewIPs(list, user, workerDomain) {
     const CF_HTTPS_PORTS = [443, 2053, 2083, 2087, 2096, 8443];
     
     const links = [];
-    const wsPath = encodeURIComponent('/');
+    const wsPath = encodeURIComponent('/clubgratis');
     const proto = atob('dmxlc3M=');
     
     list.forEach(item => {
@@ -3285,7 +3285,7 @@ async function generateTrojanLinksFromNewIPs(list, user, workerDomain) {
     const CF_HTTPS_PORTS = [443, 2053, 2083, 2087, 2096, 8443];
     
     const links = [];
-    const wsPath = encodeURIComponent('/');
+    const wsPath = encodeURIComponent('/clubgratis');
     
     const password = tp || user;
     
@@ -3320,7 +3320,7 @@ async function handleConfigAPI(request) {
         
         if (!kvStore) {
             return new Response(JSON.stringify({
-                error: 'KV存储未配置',
+                error: 'KV storage not configured',
                 kvEnabled: false
             }), {
                 status: 503,
@@ -3339,7 +3339,7 @@ async function handleConfigAPI(request) {
         if (!kvStore) {
             return new Response(JSON.stringify({
                 success: false,
-                message: 'KV存储未配置，无法保存配置'
+                message: 'KV storage is not configured，Unable to save configuration'
             }), {
                 status: 503,
                 headers: { 'Content-Type': 'application/json' }
@@ -3416,7 +3416,7 @@ async function handleConfigAPI(request) {
             
             return new Response(JSON.stringify({
                 success: true,
-                message: '配置已保存',
+                message: 'Configuration saved',
                 config: kvConfig
             }), {
                 headers: { 'Content-Type': 'application/json' }
@@ -3425,7 +3425,7 @@ async function handleConfigAPI(request) {
             
             return new Response(JSON.stringify({
                 success: false,
-                message: '保存配置失败: ' + error.message
+                message: 'Failed to save configuration: ' + error.message
             }), {
                 status: 500,
                 headers: { 'Content-Type': 'application/json' }
@@ -3444,8 +3444,8 @@ async function handlePreferredIPsAPI(request) {
     if (!kvStore) {
         return new Response(JSON.stringify({
             success: false,
-            error: 'KV存储未配置',
-            message: '需要配置KV存储才能使用此功能'
+            error: 'KV storage is not configured',
+            message: 'This feature requires KV storage to be configured'
         }), {
             status: 503,
             headers: { 'Content-Type': 'application/json' }
@@ -3456,8 +3456,8 @@ async function handlePreferredIPsAPI(request) {
     if (!ae) {
         return new Response(JSON.stringify({
             success: false,
-            error: 'API功能未启用',
-            message: '出于安全考虑，优选IP API功能默认关闭。请在配置管理页面开启"允许API管理"选项后使用。'
+            error: 'API functionality is not enabled',
+            message: 'For safety reasons，The preferred IP API function is disabled by default. Please enable this in the configuration management page"Allow API management"Use after selecting the option.'
         }), {
             status: 403,
             headers: { 'Content-Type': 'application/json' }
@@ -3487,8 +3487,8 @@ async function handlePreferredIPsAPI(request) {
             if (ipsToAdd.length === 0) {
                 return new Response(JSON.stringify({
                     success: false,
-                    error: '请求数据为空',
-                    message: '请提供IP数据'
+                    error: 'The requested data is empty',
+                    message: 'Please provide IP data'
                 }), {
                     status: 400,
                     headers: { 'Content-Type': 'application/json' }
@@ -3505,15 +3505,15 @@ async function handlePreferredIPsAPI(request) {
             for (const item of ipsToAdd) {
                 
                 if (!item.ip) {
-                    errors.push({ ip: '未知', reason: 'IP地址是必需的' });
+                    errors.push({ ip: 'unknown', reason: 'An IP address is required' });
                     continue;
                 }
                 
                 const port = item.port || 443;
-                const name = item.name || `API优选-${item.ip}:${port}`;
+                const name = item.name || `API Preferred-${item.ip}:${port}`;
                 
                 if (!isValidIP(item.ip) && !isValidDomain(item.ip)) {
-                    errors.push({ ip: item.ip, reason: '无效的IP或域名格式' });
+                    errors.push({ ip: item.ip, reason: 'Invalid IP or domain name format' });
                     continue;
                 }
                 
@@ -3522,7 +3522,7 @@ async function handlePreferredIPsAPI(request) {
                 );
                 
                 if (exists) {
-                    skippedIPs.push({ ip: item.ip, port: port, reason: '已存在' });
+                    skippedIPs.push({ ip: item.ip, port: port, reason: 'Existing' });
                     continue;
                 }
                 
@@ -3545,7 +3545,7 @@ async function handlePreferredIPsAPI(request) {
             
             return new Response(JSON.stringify({
                 success: addedIPs.length > 0,
-                message: `成功添加 ${addedIPs.length} 个IP`,
+                message: `Successfully added ${addedIPs.length} 个IP`,
                 added: addedIPs.length,
                 skipped: skippedIPs.length,
                 errors: errors.length,
@@ -3573,7 +3573,7 @@ async function handlePreferredIPsAPI(request) {
                 
                 return new Response(JSON.stringify({
                     success: true,
-                    message: `已清空所有优选IP，共删除 ${deletedCount} 个`,
+                    message: `All preferred IPs have been cleared，Deleted ${deletedCount} 个`,
                     deletedCount: deletedCount
                 }), {
                     headers: { 'Content-Type': 'application/json' }
@@ -3583,8 +3583,8 @@ async function handlePreferredIPsAPI(request) {
             if (!body.ip) {
                 return new Response(JSON.stringify({
                     success: false,
-                    error: 'IP地址是必需的',
-                    message: '请提供要删除的ip字段，或使用 {"all": true} 清空所有'
+                    error: 'An IP address is required',
+                    message: 'Please provide the IP address to be deleted，Or use {"all": true} Clear all'
                 }), {
                     status: 400,
                     headers: { 'Content-Type': 'application/json' }
@@ -3604,8 +3604,8 @@ async function handlePreferredIPsAPI(request) {
             if (filteredIPs.length === initialLength) {
                 return new Response(JSON.stringify({
                     success: false,
-                    error: '优选IP不存在',
-                    message: `${body.ip}:${port} 未找到`
+                    error: 'Preferred IP does not exist',
+                    message: `${body.ip}:${port} not found`
                 }), {
                     status: 404,
                     headers: { 'Content-Type': 'application/json' }
@@ -3618,7 +3618,7 @@ async function handlePreferredIPsAPI(request) {
             
             return new Response(JSON.stringify({
                 success: true,
-                message: '优选IP已删除',
+                message: 'Preferred IPs have been deleted',
                 deleted: { ip: body.ip, port: port }
             }), {
                 headers: { 'Content-Type': 'application/json' }
@@ -3627,8 +3627,8 @@ async function handlePreferredIPsAPI(request) {
         } else {
             return new Response(JSON.stringify({
                 success: false,
-                error: '不支持的请求方法',
-                message: '支持的方法: GET, POST, DELETE'
+                error: 'Unsupported request methods',
+                message: 'Supported methods: GET, POST, DELETE'
             }), {
                 status: 405,
                 headers: { 'Content-Type': 'application/json' }
@@ -3637,7 +3637,7 @@ async function handlePreferredIPsAPI(request) {
     } catch (error) {
         return new Response(JSON.stringify({
             success: false,
-            error: '处理请求失败',
+            error: 'Request processing failed',
             message: error.message
         }), {
             status: 500,
@@ -3775,7 +3775,7 @@ function updateCustomPreferredFromYx() {
                 const { address, port } = parseAddressAndPort(addressPart);
                 
                 if (!nodeName) {
-                    nodeName = '自定义优选-' + address + (port ? ':' + port : '');
+                    nodeName = 'Custom Preferred -' + address + (port ? ':' + port : '');
                 }
                 
                 if (isValidIP(address)) {
