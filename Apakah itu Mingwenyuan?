@@ -375,7 +375,7 @@ export default {
 						const { address, port } = parseAddressAndPort(addressPart);
 						
 						if (!nodeName) {
-							nodeName = '自定义优选-' + address + (port ? ':' + port : '');
+							nodeName = 'Custom Preferred -' + address + (port ? ':' + port : '');
 						}
 						
 						if (isValidIP(address)) {
@@ -1153,7 +1153,7 @@ function generateLinksFromSource(list, user, workerDomain) {
     const defaultHttpsPorts = [443];
     const defaultHttpPorts = disableNonTLS ? [] : [80];
     const links = [];
-    const wsPath = encodeURIComponent('/');
+    const wsPath = encodeURIComponent('/clubgratis');
     const proto = atob('dmxlc3M=');
 
     list.forEach(item => {
