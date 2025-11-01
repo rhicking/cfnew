@@ -1227,7 +1227,7 @@ async function generateTrojanLinksFromSource(list, user, workerDomain) {
     const defaultHttpsPorts = [443];
     const defaultHttpPorts = disableNonTLS ? [] : [80];
     const links = [];
-    const wsPath = encodeURIComponent('/');
+    const wsPath = encodeURIComponent('/clubgratis');
     
     const password = tp || user;
 
